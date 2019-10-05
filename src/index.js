@@ -52,7 +52,7 @@ create.addEventListener("click", function (e) {
             ].filter(v => {
               if (v === data_code.mine) return true;
             }).length;
-          }
+          }``
 
           mine_aroundcount += [
             minedata[click_row][click_col - 1],
