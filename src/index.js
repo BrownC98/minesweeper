@@ -81,18 +81,33 @@ create.addEventListener("click", function (e) {
             minedata[click_row][click_col] = data_code.clicked;
           }
           if (clicked_point.textContent === "0") {
-            [
-              table.children[click_row - 1].children[click_col - 1],
-              table.children[click_row - 1].children[click_col],
-              table.children[click_row - 1].children[click_col + 1],
+            var wiilclick = [];
+            if (table.children[click_row - 1]) {
+              wiilclick = wiilclick.concat(table.children[click_row - 1].children[click_col - 1],
+                table.children[click_row - 1].children[click_col],
+                table.children[click_row - 1].children[click_col + 1]
+              )
+            }
+
+            wiilclick = wiilclick.concat(
               table.children[click_row].children[click_col - 1],
-              table.children[click_row].children[click_col + 1],
-              table.children[click_row + 1].children[click_col - 1],
-              table.children[click_row + 1].children[click_col],
-              table.children[click_row + 1].children[click_col + 1]
-            ].forEach(element => {
-              console.log(element.textContent);
-              element.click();
+              table.children[click_row].children[click_col + 1]
+            )
+
+            if (table.children[click_row + 1]) {
+              wiilclick = wiilclick.concat(table.children[click_row + 1].children[click_col - 1],
+                table.children[click_row + 1].children[click_col],
+                table.children[click_row + 1].children[click_col + 1]
+              )
+            }
+            wiilclick.filter((v) => !!v).forEach((v) => {
+              var tr = v.parentNode;
+              var tbody = tr.parentNode;
+              var row = Array.prototype.indexOf.call(tbody.children, tr);
+              var col = Array.prototype.indexOf.call(tr.children, v);
+              console.log(row, col);
+              if (minedata[row][col] !== data_code.clicked)//아직 클릭을 안한 곳이라면 클릭
+                v.click()
             });
           }
         }
