@@ -21,7 +21,7 @@ create.addEventListener("click", function (e) {
   for (var i = 0; i < row; ++i) {
     var tr = document.createElement("tr");
     minedata.push([]);
-    for (var j = 0; j < row; ++j) {
+    for (var j = 0; j < col; ++j) {
       var td = document.createElement("td");
       minedata[i].push("0");
       td.addEventListener("click", function (e) {
